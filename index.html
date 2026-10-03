@@ -39,7 +39,7 @@ details p,details li{color:var(--mut);margin:4px 0}ul{padding-left:18px;margin:6
 .lv{display:block;width:100%;text-align:left;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:9px 12px;margin:6px 0;font:inherit}
 .lv.past{opacity:.55}.lv.cur{border-color:var(--ac);border-width:2px}
 .tag{display:inline-block;font-size:11px;background:var(--ac);color:var(--ac2);border-radius:6px;padding:1px 6px;margin-right:6px}
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:9999}
 nav button{flex:1;padding:12px 4px;background:none;border:0;color:var(--mut);font-size:11px;font-weight:600}
 nav button.on{color:var(--ac)}
 .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
@@ -176,24 +176,28 @@ nav button:active{transform:scale(.94)}
 /* ===== menu inferior no celular (mesmo estilo) ===== */
 @media(max-width:899px){
 body{padding:0 0 24px 0}
-main{margin:0 auto;max-width:720px;padding:14px 14px 100px 14px}
+main{margin:0 auto;max-width:720px;padding:14px 14px 110px 14px}
 nav{
-  position:fixed;
-  top:auto;
-  left:12px;
-  right:12px;
-  bottom:calc(10px + env(safe-area-inset-bottom,0px));
-  width:auto;
-  max-width:480px;
-  margin:0 auto;
-  flex-direction:row;
+  position:fixed !important;
+  top:auto !important;
+  left:12px !important;
+  right:12px !important;
+  bottom:calc(10px + env(safe-area-inset-bottom,0px)) !important;
+  width:auto !important;
+  max-width:480px !important;
+  margin:0 auto !important;
+  flex-direction:row !important;
   justify-content:space-around;
   align-items:center;
   gap:0;
   padding:6px 8px;
   border-radius:26px;
-  background:var(--dk);
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  background:rgba(23,24,27,0.75) !important;
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+  z-index: 9999 !important;
+  isolation: isolate;
 }
 nav button{
   flex:1;
@@ -511,6 +515,80 @@ body {
   pointer-events: none;
 }
 .card { position: relative; overflow: hidden; }
+
+
+/* ===== Desktop mais espaçoso (aba inteira) ===== */
+@media(min-width:900px){
+  body{
+    padding: 16px !important;
+    background: var(--pg, #0a0b0c) !important;
+  }
+  #shell{
+    max-width: none !important;
+    width: 100% !important;
+    min-height: calc(100vh - 32px) !important;
+    border-radius: 28px !important;
+    gap: 0 !important;
+  }
+  nav{
+    width: 240px !important;
+    padding: 20px 14px !important;
+    border-radius: 0 !important;
+  }
+  nav::before{
+    font-size: 20px !important;
+    padding: 8px 16px 24px !important;
+  }
+  nav button{
+    padding: 14px 16px !important;
+    font-size: 14px !important;
+    border-radius: 14px !important;
+  }
+  main{
+    flex: 1 !important;
+    max-width: none !important;
+    width: 100% !important;
+    border-radius: 0 28px 28px 0 !important;
+    padding: 28px 36px 40px !important;
+    min-width: 0 !important;
+  }
+  /* grid mais largo */
+  .flux{
+    grid-template-columns: repeat(12, 1fr) !important;
+    gap: 16px !important;
+  }
+  .g-big{ grid-column: span 4 !important; grid-row: span 2 !important; }
+  .g-hr{ grid-column: span 4 !important; }
+  .g-ac{ grid-column: span 4 !important; }
+  .g-wl{ grid-column: span 4 !important; }
+  .g-sl{ grid-column: span 8 !important; }
+  .bento{
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+  }
+  .bento .half, .half{ grid-column: span 2 !important; }
+  .bento .full, .full{ grid-column: 1 / -1 !important; }
+  .kpi{
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+  }
+  .stk{
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  h1{ font-size: 40px !important; }
+  .card{ padding: 20px 22px !important; }
+}
+
+@media(min-width:1200px){
+  main{ padding: 32px 48px 48px !important; }
+  nav{ width: 260px !important; }
+  .flux{ gap: 18px !important; }
+}
+
+@media(min-width:1600px){
+  main{ padding: 36px 56px 56px !important; }
+  #shell{ border-radius: 32px !important; }
+}
 
 </style>
 </head>
