@@ -367,6 +367,151 @@ body { min-height: 100dvh; }
   nav { bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
 }
 
+
+/* ===== Liquid Glass effect ===== */
+:root {
+  --glass-bg: rgba(255,255,255,0.12);
+  --glass-bg-strong: rgba(255,255,255,0.18);
+  --glass-border: rgba(255,255,255,0.22);
+  --glass-blur: 18px;
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --glass-bg: rgba(255,255,255,0.07);
+    --glass-bg-strong: rgba(255,255,255,0.11);
+    --glass-border: rgba(255,255,255,0.14);
+    --glass-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
+}
+:root[data-theme="dark"] {
+  --glass-bg: rgba(255,255,255,0.07);
+  --glass-bg-strong: rgba(255,255,255,0.11);
+  --glass-border: rgba(255,255,255,0.14);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+:root[data-theme="light"] {
+  --glass-bg: rgba(255,255,255,0.45);
+  --glass-bg-strong: rgba(255,255,255,0.6);
+  --glass-border: rgba(255,255,255,0.55);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+/* Cards com glass */
+.card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.12);
+  border-radius: 24px !important;
+}
+
+/* Nav inferior / lateral com glass */
+nav {
+  background: rgba(23,24,27,0.55) !important;
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Hero / cards escuros */
+.hero, .dk {
+  background: rgba(23,24,27,0.65) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* Pills e botões secundários */
+.pill {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border) !important;
+}
+.pill.on {
+  background: var(--lime) !important;
+  border-color: var(--lime) !important;
+  color: #111 !important;
+  backdrop-filter: none;
+}
+
+/* Inputs com glass */
+input, textarea, .selw {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* Banner de instalar */
+.install-banner {
+  background: rgba(23,24,27,0.7) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+/* Modal */
+.mds {
+  background: rgba(28,29,34,0.75) !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* Timer de descanso */
+.rt .rtc {
+  background: rgba(23,24,27,0.75) !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Fundo um pouco mais vivo para o glass aparecer */
+body {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(183,169,244,0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(215,242,90,0.12), transparent),
+    radial-gradient(ellipse 50% 50% at 50% 100%, rgba(183,169,244,0.08), transparent),
+    var(--bg) !important;
+}
+
+/* Shell desktop */
+@media(min-width:900px) {
+  #shell {
+    background: rgba(23,24,27,0.85) !important;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  main {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+/* Brilho sutil no topo dos cards (efeito líquido) */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent 40%, transparent 60%, rgba(255,255,255,0.08));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.card { position: relative; overflow: hidden; }
+
 </style>
 </head>
 <body>
