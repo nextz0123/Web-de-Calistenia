@@ -737,9 +737,81 @@ nav button.on{background:linear-gradient(180deg,#b4f0dc,#7ad4b6) !important;box-
 @media(prefers-reduced-motion:reduce){body::before,main::before{animation:none}.card::after{transition:none}}
 @media(prefers-reduced-transparency:reduce){.card,.pill,.selw,.sr,.bell,.rb,input,textarea,nav,.mds{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}}
 #sq,.sr input{background:transparent !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;outline:0}
+/* ===== MAIS LEGÍVEL: textos mais escuros/claros, maiores, vidro menos transparente ===== */
+:root{--mut:#475853;--lg-a:rgba(255,255,255,.88);--lg-b:rgba(255,255,255,.62);--wp-rgb:238,244,241}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--mut:#c2d0cb;--lg-a:rgba(255,255,255,.17);--lg-b:rgba(255,255,255,.08);--wp-rgb:9,16,14}}
+:root[data-theme="dark"]{--mut:#c2d0cb;--lg-a:rgba(255,255,255,.17);--lg-b:rgba(255,255,255,.08);--wp-rgb:9,16,14}
+:root[data-theme="light"]{--mut:#475853;--lg-a:rgba(255,255,255,.88);--lg-b:rgba(255,255,255,.62);--wp-rgb:238,244,241}
+body{font-size:16px}
+.mut{font-size:13.5px;font-weight:500}
+.kh{font-size:15px;font-weight:600}
+.u{color:var(--mut)}
+.dk .mut,.hero .mut,.rtc .mut,.mds .mut{color:#c6d3ce}
+.lm .mut,.lm .u,.lm div{color:#0f3d32}
+.lm .big,.lm .btn{color:inherit}
+::placeholder{color:var(--mut);opacity:.85}
+nav button{color:#d6e2dd}
+@media(max-width:899px){nav button span{font-size:11px !important;font-weight:500}}
+@media(min-width:900px){nav button{color:#dbe6e1}}
+
+/* ===== wallpaper de fundo ===== */
+#wp{position:fixed;inset:-24px;z-index:-3;display:none;background-size:cover;background-position:center;filter:blur(var(--wp-blur,0px))}
+#wp::after{content:"";position:absolute;inset:0;background:rgba(var(--wp-rgb,238,244,241),var(--wp-a,.35))}
+html.has-wp #wp{display:block}
+html.has-wp body{background:transparent !important}
+html.has-wp body::before,html.has-wp main::before{display:none !important}
+html.has-wp #shell,html.has-wp main{background:transparent !important}
+:root.has-wp{--lg-a:rgba(255,255,255,.9);--lg-b:rgba(255,255,255,.7)}
+@media (prefers-color-scheme:dark){:root.has-wp:not([data-theme="light"]){--lg-a:rgba(14,24,21,.72);--lg-b:rgba(14,24,21,.56)}}
+:root.has-wp[data-theme="dark"]{--lg-a:rgba(14,24,21,.72);--lg-b:rgba(14,24,21,.56)}
+:root.has-wp[data-theme="light"]{--lg-a:rgba(255,255,255,.9);--lg-b:rgba(255,255,255,.7)}
+@media(min-width:900px){html.has-wp nav{background:linear-gradient(135deg,var(--lg-nav),rgba(18,32,30,.5)) !important;backdrop-filter:blur(28px) saturate(200%) !important;-webkit-backdrop-filter:blur(28px) saturate(200%) !important;border:1px solid rgba(255,255,255,.22) !important;border-radius:26px !important;box-shadow:inset 0 1.5px 1px rgba(255,255,255,.35),0 14px 34px rgba(11,19,17,.3) !important}
+ html.has-wp #shell{border-color:transparent !important}}
+html.has-wp .top,html.has-wp .hd{text-shadow:none}
+
+/* ===== tela de Config: interruptor e wallpapers ===== */
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sw{flex:none;width:58px;height:34px;border-radius:999px;border:0;padding:3px;background:rgba(15,31,27,.28);position:relative;transition:background .25s ease}
+.sw i{display:block;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.sw.on{background:#4fc9a4}.sw.on i{transform:translateX(24px)}
+.wps{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px}
+.wpw{position:relative}
+.wpt{width:100%;aspect-ratio:1;border-radius:18px;border:2px solid transparent;background-size:cover;background-position:center;background-color:var(--bg);color:var(--tx);font:inherit;font-weight:600;font-size:12px;padding:0}
+.wpt.none,.wpt.add{display:grid;place-items:center;border:2px dashed var(--mut);background:transparent}
+.wpt.on{border:3px solid #4fc9a4;box-shadow:0 0 0 2px rgba(79,201,164,.35)}
+.wpx{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;padding:0;background:rgba(0,0,0,.6);color:#fff;font-size:12px;line-height:1}
+input[type=range]{accent-color:#4fc9a4;padding:0;height:34px}
+
+/* ===== LIQUID GLASS DESLIGADO: visual sólido e simples ===== */
+html.no-glass body::before,html.no-glass main::before,html.no-glass .card::before,html.no-glass .card::after,html.no-glass .btn::after,html.no-glass nav button::after{display:none !important}
+html.no-glass:not(.has-wp) body{background:var(--pg) !important}
+html.no-glass .card:not(.dk):not(.hero):not(.lm),html.no-glass .pill:not(.on),html.no-glass .selw,html.no-glass .sr,html.no-glass .bell,html.no-glass .rb:not(.dkb){background:var(--card) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border:1px solid var(--bd) !important;box-shadow:0 1px 2px rgba(15,31,27,.06) !important}
+html.no-glass input:not([type=checkbox]):not([type=range]),html.no-glass textarea{background:var(--bg) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border:1px solid var(--bd) !important;box-shadow:none !important}
+html.no-glass #sq,html.no-glass .sr input{background:transparent !important;border:0 !important}
+html.no-glass .hero,html.no-glass .dk{background:#12201e !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border:0 !important;box-shadow:0 1px 2px rgba(15,31,27,.1) !important}
+html.no-glass .lm{background:#8be0c4 !important;border:0 !important;box-shadow:none !important}
+html.no-glass .stk>div{background:var(--bg) !important;border:0;box-shadow:none}
+html.no-glass .chip:not(.on),html.no-glass .rbt:not(.rec),html.no-glass .how{background:var(--bg) !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html.no-glass .pill.on,html.no-glass .chip.on,html.no-glass .rbt.rec,html.no-glass .dk .btn,html.no-glass .hero .btn,html.no-glass .rb.dkb,html.no-glass nav button.on{background:#8be0c4 !important;box-shadow:none !important}
+html.no-glass .bdg{box-shadow:none !important}
+html.no-glass .btn{box-shadow:none}
+html.no-glass .lm .pill{background:rgba(15,31,27,.12) !important;border:0 !important}
+html.no-glass .rt .pill{background:rgba(255,255,255,.14) !important;color:#fff !important;border:0 !important}
+html.no-glass nav{background:#12201e !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border:0 !important;box-shadow:0 8px 24px rgba(11,19,17,.25) !important}
+html.no-glass .mds,html.no-glass #ts,html.no-glass .rt .rtc{background:#16231f !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;box-shadow:0 12px 36px rgba(0,0,0,.35) !important}
+html.no-glass .rt.done .rtc{background:#8be0c4 !important}
+html.no-glass .mds .sm{background:rgba(255,255,255,.14) !important;color:#fff !important}
+@media(min-width:900px){html.no-glass nav{background:transparent !important;box-shadow:none !important}html.no-glass nav button.on{background:#fff !important}
+ html.no-glass.has-wp nav{background:#12201e !important;border-radius:26px !important}}
+/* texto solto sobre wallpaper ganha halo para ler melhor */
+html.has-wp main>h1,html.has-wp main>.mut,html.has-wp .hd .mut,html.has-wp .hd h1,html.has-wp .top .mut,html.has-wp .top b{text-shadow:0 1px 10px rgba(var(--wp-rgb),.95),0 0 3px rgba(var(--wp-rgb),.7)}
+@media(max-width:899px){nav button{padding:8px 0 !important;min-width:0;flex:1 1 0 !important}nav button span{font-size:10.5px !important;letter-spacing:-.15px}}
+@media(max-width:899px){nav{left:8px !important;right:8px !important;padding:6px 4px !important}nav button span{font-size:10px !important}}
+@media(max-width:380px){nav button span{font-size:9.5px !important;letter-spacing:-.25px}}
 </style>
 </head>
 <body>
+<div id="wp" aria-hidden="true"></div>
 
 <div id="installBanner" class="install-banner" role="dialog" aria-label="Instalar aplicativo">
   <div style="flex:1;min-width:0">
@@ -924,7 +996,7 @@ function vP(){let h=`<h1>Progressões</h1><div class="mut">Só avance quando fiz
  P[k][1].forEach((x,i)=>{const [n,m,sr,d,t]=x.split('|');const show=i==c||i==c+1;
  h+=`<button class="lv ${i<c?'past':i==c?'cur':''}" onclick="setP('${k}',${i})">${i<c?'✓ ':i==c?'▶ ':''}<b>${i+1}. ${n}</b>${show?`<div class="mut">${i==c?'Atual':'Próximo'} · Meta p/ avançar: ${m} · ${sr} · ${d} · ${t}</div>`:''}${show&&/Pistol|Nordic|One-Arm|HSPU|Handstand|Archer|Búlgaro|Barra Fixa|Pike|Dips/i.test(n)?'<div class="warn">⚠️ Pare se sentir dor no ombro, cotovelo ou joelho.</div>':''}</button>`})}
  return h}
-function vG(){return `<h1>Mais</h1>
+function vG(){return `<h1>Config</h1>${vV()}
 <div class="card"><details open><summary>Regras de ouro</summary><ul><li>Só aumente a dificuldade quando a forma estiver PERFEITA.</li><li>Anote todas as séries e repetições.</li><li>Amplitude completa e controle (2s na descida).</li><li>Dor articular (ombro, cotovelo, joelho) → pare e regrida.</li><li>Durma 8h+ e coma o suficiente.</li><li>Topo da faixa de reps com boa forma → avance.</li><li>Aquecimento obrigatório antes de todo treino.</li></ul></details>
 <details><summary>Descanso</summary><p>Força (barra, flexão, dips, agachamento): 90-120s. Isolamento / core: 60-90s. Entre exercícios diferentes: 60-90s.</p></details></div>
 <div class="card"><b>Semana modelo (4 dias)</b>${WEEK.map(d=>`<div style="padding:5px 0;border-bottom:1px solid var(--bd)"><b>${d[0]}</b> — ${d[1]} <span class="mut">(${d[2]})</span></div>`).join('')}<p class="mut">Frequência: 3-4 dias por semana (máximo 5).</p></div>
@@ -1094,18 +1166,50 @@ function wch(){const P2=[...S.logs].sort((a,b)=>a.ts-b.ts).map(l=>({t:l.ts,v:par
  <text x="2" y="${(Y(hi)+3).toFixed(1)}" font-size="9" fill="#6c7d77">${hi}</text><text x="2" y="${(Y(lo)+3).toFixed(1)}" font-size="9" fill="#6c7d77">${lo}</text>
  <text x="24" y="109" font-size="9" fill="#6c7d77">${dt(P2[0].t)}</text><text x="276" y="109" font-size="9" text-anchor="end" fill="#6c7d77">${dt(P2[P2.length-1].t)}</text></svg>
  <div class="mut">${dp>0?'+':''}${dp.toFixed(1)} kg desde o primeiro registro · ${P2.length} registros</div></div>`}
+/* ===== VISUAL: liquid glass on/off + wallpapers (imagens ficam no IndexedDB deste aparelho) ===== */
+let WP={list:[],ok:true,msg:''};
+const wpOpen=()=>new Promise((res,rej)=>{try{const q=indexedDB.open('calis_wp',1);q.onupgradeneeded=()=>q.result.createObjectStore('w',{keyPath:'id'});q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)}catch(e){rej(e)}});
+const wpTx=(mode,fn)=>wpOpen().then(db=>new Promise((res,rej)=>{const t=db.transaction('w',mode),rq=fn(t.objectStore('w'));t.oncomplete=()=>res(rq&&rq.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)}));
+async function wpInit(){try{const all=await wpTx('readonly',st=>st.getAll());WP.list=(all||[]).sort((a,b)=>a.id-b.id).map(w=>({id:w.id,url:URL.createObjectURL(w.blob)}))}catch(e){WP.ok=false}applyLook();if(tab=='g')r()}
+function applyLook(){const e=document.documentElement,w=S.wp||{},a=WP.list.find(x=>x.id===w.a),el=document.getElementById('wp');
+ e.classList.toggle('no-glass',S.glass===false);e.classList.toggle('has-wp',!!a);
+ if(el){el.style.backgroundImage=a?'url("'+a.url+'")':'none';el.style.setProperty('--wp-a',w.dim==null?.5:w.dim);el.style.setProperty('--wp-blur',(w.blur==null?6:w.blur)+'px')}}
+function glSet(v){S.glass=v;save();applyLook();r()}
+function wpPick(id){S.wp=S.wp||{};S.wp.a=id;save();WP.msg='';applyLook();r()}
+function wpSet(k,v,id,txt){S.wp=S.wp||{};S.wp[k]=+v;save();applyLook();const l=document.getElementById(id);if(l)l.textContent=txt}
+function wpDel(id){if(!confirm('Remover este wallpaper?'))return;const x=WP.list.find(w=>w.id===id);if(x)URL.revokeObjectURL(x.url);WP.list=WP.list.filter(w=>w.id!==id);wpTx('readwrite',st=>st.delete(id)).catch(()=>{});
+ if(S.wp&&S.wp.a===id){S.wp.a=null;save()}WP.msg='';applyLook();r()}
+function wpFile(inp){const f=inp.files&&inp.files[0];inp.value='';if(!f)return;
+ if(!/^image\//.test(f.type)){WP.msg='Escolha um arquivo de imagem (JPG, PNG, WebP).';r();return}
+ if(WP.list.length>=8){WP.msg='Limite de 8 wallpapers. Remova um para adicionar outro.';r();return}
+ const u=URL.createObjectURL(f),img=new Image();
+ img.onload=()=>{const k=Math.min(1,1600/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);
+  c.toBlob(async b=>{if(!b){WP.msg='Não consegui processar essa imagem.';r();return}
+   const rec={id:Date.now(),blob:b};let ok=true;try{await wpTx('readwrite',st=>st.put(rec))}catch(e){ok=false}
+   WP.list.push({id:rec.id,url:URL.createObjectURL(b)});S.wp=S.wp||{};S.wp.a=rec.id;save();
+   WP.msg=ok?'Wallpaper adicionado!':'Aplicado, mas este navegador não deixou salvar: ele some ao fechar o app.';applyLook();r()},'image/jpeg',.86)};
+ img.onerror=()=>{URL.revokeObjectURL(u);WP.msg='Não consegui abrir essa imagem. Tente JPG ou PNG.';r()};img.src=u}
+function vV(){const w=S.wp||{},gl=S.glass!==false,a=WP.list.find(x=>x.id===w.a),dim=Math.round((w.dim==null?.5:w.dim)*100),bl=w.blur==null?6:w.blur;
+ return `<div class="card"><div class="kh"><span class="ic">🎨</span><span>Visual</span></div>
+ <div class="setrow"><div><b>Liquid glass</b><div class="mut">Vidro translúcido com brilho e reflexo. Desligado, o visual fica sólido e mais simples.</div></div><button class="sw ${gl?'on':''}" role="switch" aria-checked="${gl}" aria-label="Liquid glass" onclick="glSet(${!gl})"><i></i></button></div>
+ <div class="mut" style="margin:16px 0 8px"><b>Wallpaper</b> · as imagens ficam só neste aparelho</div>
+ <div class="wps"><button class="wpt none ${a?'':'on'}" onclick="wpPick(null)">Nenhum</button>${WP.list.map(x=>`<div class="wpw"><button class="wpt ${a&&a.id===x.id?'on':''}" style="background-image:url('${x.url}')" onclick="wpPick(${x.id})" aria-label="Usar este wallpaper"></button><button class="wpx" onclick="wpDel(${x.id})" aria-label="Remover wallpaper">✕</button></div>`).join('')}<button class="wpt add" onclick="document.getElementById('wpf').click()">+ Adicionar</button></div>
+ <input id="wpf" type="file" accept="image/*" hidden onchange="wpFile(this)">
+ ${WP.ok?'':'<p class="mut">Este navegador não permite guardar imagens; o wallpaper vale só até fechar.</p>'}${WP.msg?`<p class="mut">${WP.msg}</p>`:''}
+ ${a?`<div class="mut" style="margin-top:14px">Clarear/escurecer o fundo (ajuda a ler): <b id="wd">${dim}%</b></div><input type="range" min="0" max="85" value="${dim}" oninput="wpSet('dim',this.value/100,'wd',this.value+'%')">
+ <div class="mut" style="margin-top:10px">Desfoque: <b id="wb">${bl}px</b></div><input type="range" min="0" max="24" value="${bl}" oninput="wpSet('blur',this.value,'wb',this.value+'px')">`:''}</div>`}
 const LV={A:'puxada',B:'empurrao',C:'pernas'};
 function lvl(){const k=LV[cur],l=P[k][1][S.prog[k]||0].split('|');return `<div style="margin-top:8px">Seu nível: <b>${l[0]}</b> · <a href="#" onclick="go('p');return false">ver progressão</a></div>`}
 let B={mode:'',txt:'',msg:''},cf=0;
-function applyTh(){const e=document.documentElement;S.theme?e.setAttribute('data-theme',S.theme):e.removeAttribute('data-theme')}
+function applyTh(){const e=document.documentElement;S.theme?e.setAttribute('data-theme',S.theme):e.removeAttribute('data-theme');applyLook()}
 function setTh(v){S.theme=v;save();applyTh();r()}
-function bk(m){B={mode:m,msg:'',txt:m=='x'?JSON.stringify({logs:S.logs,prog:S.prog,goal:S.goal,theme:S.theme,sk:S.sk,name:S.name,urges:S.urges,why:S.why,rd:S.rd,rn:S.rn}):''};r()}
+function bk(m){B={mode:m,msg:'',txt:m=='x'?JSON.stringify({logs:S.logs,prog:S.prog,goal:S.goal,theme:S.theme,sk:S.sk,name:S.name,glass:S.glass,urges:S.urges,why:S.why,rd:S.rd,rn:S.rn}):''};r()}
 function cp(){const t=document.getElementById('bt');t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}
  B.msg=ok?'Copiado! Cole num bloco de notas ou mensagem para guardar.':'Selecione o texto acima e copie manualmente.';r()}
 function imp(){try{const j=JSON.parse(document.getElementById('bt').value);if(!Array.isArray(j.logs))throw 0;
  const have=new Set(S.logs.map(l=>l.ts));let n=0;j.logs.forEach(l=>{if(l&&l.ts&&l.ex&&W[l.t]&&!have.has(l.ts)){S.logs.push(l);n++}});
- if(j.prog)S.prog=j.prog;if(j.goal)S.goal=j.goal;if(j.sk&&j.sk.s)S.sk=j.sk;if(Array.isArray(j.urges)){const hv=new Set((S.urges||[]).map(u=>u.ts));S.urges=(S.urges||[]).concat(j.urges.filter(u=>u&&u.ts&&!hv.has(u.ts)))}if(j.rd&&typeof j.rd=='object')S.rd=Object.assign(S.rd||{},j.rd);if(j.rn&&typeof j.rn=='object')S.rn=Object.assign(S.rn||{},j.rn);if(Array.isArray(j.why))S.why=j.why.slice(0,20).map(String);if(j.name)S.name=String(j.name).slice(0,24);save();B={mode:'',txt:'',msg:n+' treino(s) importado(s).'}}catch(e){B.msg='Backup inválido. Cole o texto completo do Exportar.'}r()}
-function clr(){if(cf){S={logs:[],prog:{}};save();cf=0;B={mode:'',txt:'',msg:'Todos os dados foram apagados.'};applyTh();tab='d'}else cf=1;r()}
+ if(j.prog)S.prog=j.prog;if(j.goal)S.goal=j.goal;if(j.sk&&j.sk.s)S.sk=j.sk;if(Array.isArray(j.urges)){const hv=new Set((S.urges||[]).map(u=>u.ts));S.urges=(S.urges||[]).concat(j.urges.filter(u=>u&&u.ts&&!hv.has(u.ts)))}if(j.rd&&typeof j.rd=='object')S.rd=Object.assign(S.rd||{},j.rd);if(j.rn&&typeof j.rn=='object')S.rn=Object.assign(S.rn||{},j.rn);if(Array.isArray(j.why))S.why=j.why.slice(0,20).map(String);if(j.glass===false||j.glass===true)S.glass=j.glass;if(j.name)S.name=String(j.name).slice(0,24);save();applyLook();B={mode:'',txt:'',msg:n+' treino(s) importado(s).'}}catch(e){B.msg='Backup inválido. Cole o texto completo do Exportar.'}r()}
+function clr(){if(cf){S={logs:[],prog:{}};save();WP.list.forEach(w=>URL.revokeObjectURL(w.url));WP.list=[];wpTx('readwrite',st=>st.clear()).catch(()=>{});cf=0;B={mode:'',txt:'',msg:'Todos os dados foram apagados.'};applyTh();tab='d'}else cf=1;r()}
 function vA(){const th=S.theme||'';
  return `<div class="card"><b>Ajustes</b><p class="mut">Seu nome</p><input value="${esc(S.name||'')}" placeholder="Atleta" onchange="S.name=this.value.trim().slice(0,24);save();r()"><p class="mut">Aparência</p><div class="pills">${[['','Auto'],['light','Claro'],['dark','Escuro']].map(x=>`<button class="pill ${th==x[0]?'on':''}" onclick="setTh('${x[0]}')">${x[1]}</button>`).join('')}</div>
 <p class="mut">Backup (os dados ficam só neste aparelho)</p><div class="pills"><button class="pill ${B.mode=='x'?'on':''}" onclick="bk('x')">Exportar</button><button class="pill ${B.mode=='i'?'on':''}" onclick="bk('i')">Importar</button></div>
@@ -1117,10 +1221,10 @@ r:'<rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 10h6M9 14h6M9 18
 p:'<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>',
 b:'<path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/>',
 l:'<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
-g:'<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>'};
+g:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>'};
 function r(){document.getElementById('app').innerHTML={d:vD,t:vT,r:vR,p:vP,l:vL,b:vB,g:vG}[tab]();
- const wb=wkc(0);document.getElementById('nav').innerHTML=logo()+[['d','Painel'],['t','Treinar'],['r','Registro'],['p','Progressão'],['l','Tentação'],['b','Versículo'],['g','Mais']].map(x=>`<button class="${x[0]==tab?'on':''}" onclick="go('${x[0]}')"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[x[0]]}</svg><span>${x[1]}</span>${x[0]=='r'&&wb?`<b class="nb">${wb}</b>`:''}</button>`).join('')+sidec()}
-applyTh();r();
+ const wb=wkc(0);document.getElementById('nav').innerHTML=logo()+[['d','Painel'],['t','Treinar'],['r','Registro'],['p','Progressão'],['l','Tentação'],['b','Versículo'],['g','Config']].map(x=>`<button class="${x[0]==tab?'on':''}" onclick="go('${x[0]}')"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[x[0]]}</svg><span>${x[1]}</span>${x[0]=='r'&&wb?`<b class="nb">${wb}</b>`:''}</button>`).join('')+sidec()}
+applyTh();r();wpInit();
 
 /* ===== PWA: Manifest + Service Worker + Install ===== */
 (function(){
