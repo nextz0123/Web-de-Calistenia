@@ -808,10 +808,111 @@ html.has-wp main>h1,html.has-wp main>.mut,html.has-wp .hd .mut,html.has-wp .hd h
 @media(max-width:899px){nav button{padding:8px 0 !important;min-width:0;flex:1 1 0 !important}nav button span{font-size:10.5px !important;letter-spacing:-.15px}}
 @media(max-width:899px){nav{left:8px !important;right:8px !important;padding:6px 4px !important}nav button span{font-size:10px !important}}
 @media(max-width:380px){nav button span{font-size:9.5px !important;letter-spacing:-.25px}}
+/* ===== iOS: estilo iPhone para o celular (até 899px). Desktop continua igual. ===== */
+#sbar{display:none}
+.rowl{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:0 16px;background:transparent;border:0;color:var(--tx);font:inherit;font-size:17px;text-align:left;position:relative}
+.rowl+.rowl::before{content:"";position:absolute;left:58px;right:0;top:0;height:.5px;background:var(--sep,rgba(60,60,67,.18))}
+.rli{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#fff;flex:none}
+.rli svg{width:19px;height:19px}
+.rlt{flex:1;min-width:0}.chev{color:var(--mut);font-size:24px;line-height:1;opacity:.7}
+.rowl:active{background:rgba(118,118,128,.14)}
+.ios-list{padding:0 !important;overflow:hidden}
+.seg-m{display:none}
+:root{--sep:rgba(60,60,67,.18);--ios-fill:rgba(118,118,128,.14);--seg-on:#fff;--tint:#0b9a79;--tab-bg:rgba(249,249,249,.86);--tabmut:#7c7c82;--sbar-bg:rgba(242,242,247,.82);--ios-bg:#f2f2f7}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sep:rgba(84,84,88,.55);--ios-fill:rgba(118,118,128,.28);--seg-on:#636366;--tint:#5be3c0;--tab-bg:rgba(24,24,26,.82);--tabmut:#a0a0a8;--sbar-bg:rgba(0,0,0,.72);--ios-bg:#000}}
+:root[data-theme="dark"]{--sep:rgba(84,84,88,.55);--ios-fill:rgba(118,118,128,.28);--seg-on:#636366;--tint:#5be3c0;--tab-bg:rgba(24,24,26,.82);--tabmut:#a0a0a8;--sbar-bg:rgba(0,0,0,.72);--ios-bg:#000}
+:root[data-theme="light"]{--sep:rgba(60,60,67,.18);--ios-fill:rgba(118,118,128,.14);--seg-on:#fff;--tint:#0b9a79;--tab-bg:rgba(249,249,249,.86);--tabmut:#7c7c82;--sbar-bg:rgba(242,242,247,.82);--ios-bg:#f2f2f7}
+
+@media(max-width:899px){
+ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+ :root{padding-top:0 !important;padding-bottom:0 !important}
+ body,button,input,select,textarea{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",system-ui,Roboto,"Segoe UI",sans-serif}
+ h1,.big,.ht,.rth,.rtt,.vq{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",system-ui,Roboto,sans-serif}
+ button,a,summary,label,input,select{touch-action:manipulation}
+ input,textarea,select{font-size:16px !important}
+ body{padding-top:0 !important}
+ html:not(.has-wp) body,html.no-glass:not(.has-wp) body{background:var(--ios-bg) !important}
+ html:not(.has-wp) body::before{opacity:.45}
+ main{margin:0 auto !important;max-width:720px !important;padding:calc(env(safe-area-inset-top,0px) + 50px) max(14px,env(safe-area-inset-right)) calc(49px + env(safe-area-inset-bottom,0px) + 30px) max(14px,env(safe-area-inset-left)) !important}
+ .sticky{top:calc(env(safe-area-inset-top,0px) + 44px) !important}
+
+ /* barra superior translúcida (aparece ao rolar) */
+ #sbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:9000;height:calc(44px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(8px,env(safe-area-inset-right)) 0 max(8px,env(safe-area-inset-left));align-items:center;justify-content:space-between;background:transparent;border-bottom:.5px solid transparent;transition:background .25s ease,border-color .25s ease}
+ #sbar.on{background:var(--sbar-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom-color:var(--sep)}
+ #stt{position:absolute;left:56px;right:56px;top:env(safe-area-inset-top,0px);height:44px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;opacity:0;transition:opacity .2s ease;pointer-events:none}
+ #sbar.on #stt{opacity:1}
+ #sback{display:none;align-items:center;gap:0;min-width:44px;height:44px;padding:0 6px 0 0;color:var(--tint);background:none !important;border:0 !important;box-shadow:none !important;font:inherit;font-size:17px;position:relative;z-index:1}
+ #sback svg{width:26px;height:26px}
+ #sadd{display:none;place-items:center;width:44px;height:44px;margin-left:auto;color:var(--tint);background:none !important;border:0 !important;box-shadow:none !important;position:relative;z-index:1}
+ #sadd svg{width:26px;height:26px}
+ #sback:active,#sadd:active{opacity:.4}
+
+ /* barra de abas estilo iOS */
+ html nav{left:0 !important;right:0 !important;bottom:0 !important;top:auto !important;width:auto !important;max-width:none !important;margin:0 !important;height:auto !important;border-radius:0 !important;border:0 !important;border-top:.5px solid var(--sep) !important;background:var(--tab-bg) !important;backdrop-filter:blur(24px) saturate(180%) !important;-webkit-backdrop-filter:blur(24px) saturate(180%) !important;box-shadow:none !important;padding:6px max(4px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom,0px)) max(4px,env(safe-area-inset-left)) !important;justify-content:space-around !important;align-items:flex-start !important;gap:0 !important}
+ html nav button[data-t="p"],html nav button[data-t="b"]{display:none !important}
+ html nav button{flex:1 1 0 !important;width:auto !important;min-width:0 !important;height:49px !important;padding:0 !important;border-radius:0 !important;background:transparent !important;box-shadow:none !important;flex-direction:column !important;justify-content:center !important;gap:3px !important;color:var(--tabmut) !important;overflow:visible !important;position:relative}
+ html nav button svg{width:25px;height:25px}
+ html nav button span{display:block !important;font-size:10px !important;font-weight:500 !important;letter-spacing:0 !important;line-height:1}
+ html nav button.on{color:var(--tint) !important}
+ html nav button.on svg{stroke-width:2.2}
+ html nav button:active{opacity:.55;transform:none}
+ html nav .nb{position:absolute !important;top:1px !important;left:calc(50% + 4px) !important;right:auto !important;background:#ff3b30 !important;color:#fff !important;min-width:18px;height:18px;padding:0 5px;border-radius:9px;font-size:11px !important;font-weight:600;display:grid !important;place-items:center;box-shadow:none !important}
+ html nav button::after{display:none !important}
+
+ /* títulos grandes e cartões */
+ h1{font-size:clamp(30px,9vw,36px) !important;font-weight:700 !important;letter-spacing:.35px !important;line-height:1.1;margin:2px 0 4px}
+ .card{border-radius:20px !important;padding:16px !important}
+ .ic{border-radius:9px !important;width:30px !important;height:30px !important;font-size:15px}
+ .kh{gap:10px}
+ .btn{border-radius:14px !important;height:50px;font-size:17px !important;font-weight:600 !important}
+ .top{margin-bottom:6px}
+ .sr{height:36px !important;border-radius:10px !important;background:var(--ios-fill) !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;padding:0 10px !important;gap:6px}
+ .sr input{font-size:17px !important}
+ .bell{width:36px !important;height:36px !important;background:var(--ios-fill) !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important}
+ .rb.dkb{display:none !important}
+ .dsel .selw{display:none !important}
+ .seg-m{display:flex;flex:1 1 100%}
+ .dsel{flex-wrap:wrap;gap:8px 10px}
+
+ /* controles segmentados */
+ .pills.seg{background:var(--ios-fill);border-radius:10px;padding:2px;gap:2px;margin:10px 0}
+ .pills.seg .pill{min-height:32px !important;height:32px;padding:0 6px !important;border-radius:8px !important;background:transparent !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;color:var(--tx) !important;font-size:13px !important;font-weight:500 !important}
+ .pills.seg .pill.on{background:var(--seg-on) !important;box-shadow:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04) !important;font-weight:600 !important}
+ .pills.seg .pill small{font-weight:400}
+
+ /* interruptor, campos, avisos */
+ .sw{width:51px;height:31px;padding:2px;background:rgba(120,120,128,.32)}.sw i{width:27px;height:27px}.sw.on{background:#34c759}.sw.on i{transform:translateX(20px)}
+ input:not([type=checkbox]):not([type=range]),textarea{border-radius:10px !important}
+ #ts{top:calc(env(safe-area-inset-top,0px) + 52px) !important}
+ .install-banner{bottom:calc(66px + env(safe-area-inset-bottom,0px)) !important}
+ .rt.on{bottom:calc(64px + env(safe-area-inset-bottom,0px)) !important}
+ .chip{width:48px !important;height:48px !important}
+
+ /* janela estilo iOS (sheet) */
+ .mds{border-radius:28px 28px 0 0 !important;padding-top:10px !important}
+ .mds::before{content:"";display:block;width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.35);margin:0 auto 14px}
+ .mdb{background:rgba(0,0,0,.4) !important}
+}
+@media(max-width:899px) and (max-width:360px){.pills.seg .pill{font-size:12px !important}}
+/* celular deitado: barra de abas mais baixa, só ícones */
+@media(max-width:899px) and (orientation:landscape) and (max-height:480px){
+ html nav button{height:40px !important;flex-direction:row !important}
+ html nav button span{display:none !important}
+ html nav{padding-top:2px !important}
+ main{padding-top:calc(env(safe-area-inset-top,0px) + 46px) !important;padding-bottom:calc(40px + env(safe-area-inset-bottom,0px) + 24px) !important}
+ .rt.on{bottom:calc(52px + env(safe-area-inset-bottom,0px)) !important}
+}
+@media(min-width:600px) and (max-width:899px){.flux,.bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:899px){
+ html nav button.on{background:transparent !important;box-shadow:none !important}
+ .card.ios-list{padding:0 !important}
+ .rowl{padding:0 16px 0 14px}
+}
 </style>
 </head>
 <body>
 <div id="wp" aria-hidden="true"></div>
+<div id="sbar"><button id="sback" onclick="go('g')" aria-label="Voltar para Config"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Config</button><div id="stt"></div><button id="sadd" onclick="openF()" aria-label="Registrar treino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>
 
 <div id="installBanner" class="install-banner" role="dialog" aria-label="Instalar aplicativo">
   <div style="flex:1;min-width:0">
@@ -861,13 +962,13 @@ let tab='d',cur=todayW(),ses={},pend=0,F={open:false};
 const ss=()=>{const s=ses[cur]=ses[cur]||{};s.d=s.d||{};s.r=s.r||{};s.a=s.a||{};s.wi=s.wi||{};return s};
 const nsets=s=>Math.max(...s.match(/\d+/g).map(Number));
 /* actions */
-function chip(el,i,j){const s=ss(),k=i+'_'+j;s.d[k]=!s.d[k];el.classList.toggle('on',s.d[k]);upd()}
+function chip(el,i,j){hap(8);const s=ss(),k=i+'_'+j;s.d[k]=!s.d[k];el.classList.toggle('on',s.d[k]);upd()}
 function fin(){const s=ss();const ex=W[cur].e.map((e,i)=>({n:e[0],s:Array.from({length:nsets(e[1])}).filter((_,j)=>s.d[i+'_'+j]).length,r:s.r[i]||'',a:(s.a&&s.a[i])||''}));
  const g=id=>document.getElementById(id).value;
  S.logs.push({ts:Date.now(),t:cur,ex,f:g('ff'),p:g('fp'),o:g('fo'),wu:!!s.wu});save();delete ses[cur];tab='d';r()}
 function del(ts){if(pend==ts){S.logs=S.logs.filter(l=>l.ts!==ts);save();pend=0}else pend=ts;r()}
 function setP(k,i){S.prog[k]=i;save();r()}
-function go0(t){stopT();T.on=false;VO=0;LG.msg='';cf=0;skcf=0;skE=false;if(t=='t'&&tab!='t'&&!(cur&&dn(cur)>0))cur=todayW();tab=t;r();scrollTo(0,0)}
+function go0(t){hap(6);stopT();T.on=false;VO=0;LG.msg='';cf=0;skcf=0;skE=false;if(t=='t'&&tab!='t'&&!(cur&&dn(cur)>0))cur=todayW();tab=t;r();scrollTo(0,0)}
 let busy=0,Q='',VO=0,T={on:false,s:0,left:600,bs:0},LG={g:'',msg:''},tI=0;
 function srch(e){e.preventDefault();Q=document.getElementById('sq').value.trim();go('r')}
 function pgIn(){const a=document.getElementById('app');
@@ -894,7 +995,7 @@ function tdy(){const d=new Date().getDay(),k=todayW(),fd=S.logs.some(l=>dk(l.ts)
  if(!k)return `<div class="card dk full"><div class="mut">Hoje · ${DN[d]}</div><div class="ht">Dia de descanso</div><div class="mut">${RESTN[d]}</div></div>`;
  return `<div class="card dk full"><div class="mut">Hoje · ${DN[d]}${d==6?' (opcional, leve)':''}</div><div class="ht">${W[k].n}</div><div class="mut">${W[k].f}</div>${fd?`<span class="bdg" style="display:inline-block;margin-top:14px">✅ Concluído hoje</span>`:`<button class="btn" onclick="go('t')">Começar treino</button>`}</div>`}
 function vT(){const t=todayW(),d=new Date().getDay();
- const pills=`<div class="pills">${['A','B','C'].map(k=>`<button class="pill ${k==cur?'on':''}" onclick="cur='${k}';r()">${k}${k==t?'<small> · hoje</small>':''}</button>`).join('')}</div>`;
+ const pills=`<div class="pills seg">${['A','B','C'].map(k=>`<button class="pill ${k==cur?'on':''}" onclick="cur='${k}';r()">${k}${k==t?'<small> · hoje</small>':''}</button>`).join('')}</div>`;
  if(!cur)return `<h1>Treinar</h1><div class="card hero"><b class="ht">Hoje é dia de descanso</b><div class="mut">${RESTN[d]}</div></div><p class="mut">Quer treinar mesmo assim? Escolha um treino:</p>${pills}`;
  const w=W[cur],s=ss(),wd=!!s.wu,T=tot(cur),n=dn(cur),p=Math.round(n/T*100);
  let h=`<div class="mut">${DN[d]}${cur==t?' · treino do dia'+(d==6?' (opcional, leve)':''):' · treino escolhido por você'}</div><h1>${w.n}</h1><div class="mut">${w.f}</div>${lvl()}${pills}
@@ -951,8 +1052,8 @@ function sidec(){const k=todayW(),fd=S.logs.some(l=>dk(l.ts)==tdk());
 function vD(){const L=[...S.logs].sort((a,b)=>b.ts-a.ts),goal=S.goal||3,now=new Date(),w=wkc(0),tk=dk(now);
  const raw=(S.name||'').trim()||'Atleta';
  const hd=`<div class="top"><div class="us"><span class="av">${esc(raw[0].toUpperCase())}</span><div><b>${esc(raw)}</b><div class="mut">My Core</div></div></div><div class="tr"><form class="sr" onsubmit="srch(event)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="sq" type="search" placeholder="Buscar treinos…" value="${esc(Q)}"></form><button class="bell" onclick="go('r')" aria-label="Registro">🔔${w?`<b>${w}</b>`:''}</button></div></div>
-<div class="hd"><div><h1>Visão geral</h1><div class="mut">Controle seu treino hoje!</div></div><div class="dsel"><button class="rb dkb" onclick="openF()">+ Registrar</button><span class="mut">${now.toLocaleDateString('pt-BR',{day:'numeric',month:'short',year:'numeric'})}</span><label class="selw"><select onchange="per=this.value;r()">${[['w','Semana'],['m','Mês'],['a','Total']].map(o=>`<option value="${o[0]}" ${per==o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></label></div></div>`;
- if(!L.length)return hd+`<div class="mo-only">${tdy()}</div>${strk()}<div class="bento" style="margin-top:14px">${skc()}${wch()}<div class="card half mut">Ainda não há treinos registrados. Comece um treino ou registre um que você já fez.</div></div>`;
+<div class="hd"><div><h1>Visão geral</h1><div class="mut">Controle seu treino hoje!</div></div><div class="dsel"><button class="rb dkb" onclick="openF()">+ Registrar</button><span class="mut">${now.toLocaleDateString('pt-BR',{day:'numeric',month:'short',year:'numeric'})}</span><div class="pills seg seg-m">${[['w','Semana'],['m','Mês'],['a','Total']].map(o=>`<button class="pill ${per==o[0]?'on':''}" onclick="per='${o[0]}';r()">${o[1]}</button>`).join('')}</div><label class="selw"><select onchange="per=this.value;r()">${[['w','Semana'],['m','Mês'],['a','Total']].map(o=>`<option value="${o[0]}" ${per==o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></label></div></div>`;
+ if(!L.length)return hd+`<div class="mo-only">${tdy()}</div>${strk()}<div class="bento" style="margin-top:14px">${skc()}${wch()}<div class="card half mut">Ainda não há treinos registrados. Comece um treino ou registre um que você já fez.</div></div>${iosList()}`;
  const mo=L.filter(l=>{const d=new Date(l.ts);return d.getMonth()==now.getMonth()&&d.getFullYear()==now.getFullYear()}).length;
  let st=0,i=w?0:1;while(i<300&&wkc(i)>0){st++;i++}
  const set=new Set(L.map(l=>dk(l.ts)));
@@ -974,15 +1075,15 @@ function vD(){const L=[...S.logs].sort((a,b)=>b.ts-a.ts),goal=S.goal||3,now=new 
 <div class="orb"><div class="o1" style="width:${sz(ty.A)}px;height:${sz(ty.A)}px"><b>${ty.A}</b><small>Puxada</small></div><div class="o2" style="width:${sz(ty.B)}px;height:${sz(ty.B)}px"><b>${ty.B}</b><small>Empurrão</small></div><div class="o3" style="width:${sz(ty.C)}px;height:${sz(ty.C)}px"><b>${ty.C}</b><small>Pernas</small></div></div>
 ${['A','B','C'].map(k=>{const q=n?Math.round(ty[k]/n*100):0;return `<div class="row"><div class="big sm">${q}<span class="u">%</span></div><div class="lb">${nm[k]}<i class="dot" style="background:${col[k]}"></i></div></div><div class="prog thick"><i style="width:${q}%;background:${col[k]}"></i></div>`}).join('')}</div>
 <div class="card g-hr"><div class="kh"><span class="ic">🔥</span><span>Sequência</span></div><div class="split"><div class="big">${st}<span class="u">sem.</span></div><div class="rt">Neste mês<b>${mo} treinos</b></div></div></div>
-<div class="card g-ac"><div class="kh"><span class="ic">🎯</span><span>Esta semana</span></div><div class="split"><div class="big">${w}<span class="u">/ ${goal}</span></div><div class="rt">Séries<b>${sets}</b></div></div><div class="pills s" style="margin-top:10px">${[3,4,5].map(g=>`<button class="pill ${g==goal?'on':''}" onclick="setG(${g})">${g}x</button>`).join('')}</div></div>
+<div class="card g-ac"><div class="kh"><span class="ic">🎯</span><span>Esta semana</span></div><div class="split"><div class="big">${w}<span class="u">/ ${goal}</span></div><div class="rt">Séries<b>${sets}</b></div></div><div class="pills s seg" style="margin-top:10px">${[3,4,5].map(g=>`<button class="pill ${g==goal?'on':''}" onclick="setG(${g})">${g}x</button>`).join('')}</div></div>
 <div class="card g-wl"><div class="kh"><span class="ic">%</span><span>Índice de constância</span><span class="bdg">${Math.round(dtr/28*100)}%</span></div><div class="big">${dtr}<span class="u">de 28 dias</span></div><div class="mut" style="margin:6px 0 8px">Toque num dia para registrar um treino nele.</div><div class="grid">${cells}</div></div>
 <div class="card dk g-sl"><div class="kh"><span class="ic">📊</span><span>Evolução semanal</span></div><div class="sts"><div class="st1"><i class="vb cl"></i><div><div class="big sm">${adh}<span class="u">%</span></div><div class="mut">Semanas com meta batida</div></div></div><div class="st1"><i class="vb cv"></i><div><div class="big sm">${avg}</div><div class="mut">Treinos por semana</div></div></div></div>
 <div class="bps">${cs.map((c,k)=>{const cu=k==7;return `<div class="bp"><div class="pr"><i class="${cu?'cl':'hb'}" style="height:${Math.max(10,c[0]/mx*120)}px"></i><i class="${cu?'cv':'hb'}" style="height:${Math.max(10,goal/mx*120)}px"></i></div><small>${c[1]}${cu?' ↗':''}</small></div>`}).join('')}</div></div></div>
-${strk()}<div class="bento" style="margin-top:14px">${skc()}${wchart}</div>`}
+${strk()}<div class="bento" style="margin-top:14px">${skc()}${wchart}</div>${iosList()}`}
 function vR(){const L=[...S.logs].sort((a,b)=>b.ts-a.ts).filter(l=>!Q||JSON.stringify([l.t,l.ex,l.o,l.p]).toLowerCase().includes(Q.toLowerCase())),wk=S.logs.filter(l=>Date.now()-l.ts<6048e5).length;
  let h=`<h1>Registro</h1><div class="mut">${S.logs.length} treinos no total · ${wk} nos últimos 7 dias${Q?` · filtro "<b>${esc(Q)}</b>" <a href="#" onclick="Q='';r();return false">limpar</a>`:''}</div><button class="btn" onclick="${F.open?'F={open:false};r()':'openF()'}">${F.open?'Cancelar':'+ Registrar treino'}</button>`;
  if(F.open)h+=`<div class="card"><b>Registrar treino</b><p class="mut">Data</p><input type="date" value="${F.d}" max="${dk(Date.now())}" onchange="F.d=this.value">
-<div class="pills">${['A','B','C'].map(k=>`<button class="pill ${k==F.t?'on':''}" onclick="setT('${k}')">${k}</button>`).join('')}</div>
+<div class="pills seg">${['A','B','C'].map(k=>`<button class="pill ${k==F.t?'on':''}" onclick="setT('${k}')">${k}</button>`).join('')}</div>
 <p class="mut">Exercícios concluídos</p>${W[F.t].e.map((e,i)=>`<label style="display:block;padding:3px 0"><input type="checkbox" style="width:auto" ${F.x[i]?'checked':''} onchange="F.x[${i}]=this.checked"> ${e[0]}</label>`).join('')}
 <p class="mut">Como se sentiu (1-10): <b id="mfv">${F.f}</b></p><input type="range" min="1" max="10" value="${F.f}" oninput="F.f=this.value;document.getElementById('mfv').textContent=this.value">
 <p></p><input type="number" step="0.1" placeholder="Peso (kg) — opcional" value="${esc(F.p)}" oninput="F.p=this.value"><p></p><textarea rows="2" placeholder="Observações / dores" oninput="F.o=this.value">${esc(F.o)}</textarea>
@@ -996,7 +1097,7 @@ function vP(){let h=`<h1>Progressões</h1><div class="mut">Só avance quando fiz
  P[k][1].forEach((x,i)=>{const [n,m,sr,d,t]=x.split('|');const show=i==c||i==c+1;
  h+=`<button class="lv ${i<c?'past':i==c?'cur':''}" onclick="setP('${k}',${i})">${i<c?'✓ ':i==c?'▶ ':''}<b>${i+1}. ${n}</b>${show?`<div class="mut">${i==c?'Atual':'Próximo'} · Meta p/ avançar: ${m} · ${sr} · ${d} · ${t}</div>`:''}${show&&/Pistol|Nordic|One-Arm|HSPU|Handstand|Archer|Búlgaro|Barra Fixa|Pike|Dips/i.test(n)?'<div class="warn">⚠️ Pare se sentir dor no ombro, cotovelo ou joelho.</div>':''}</button>`})}
  return h}
-function vG(){return `<h1>Config</h1>${vV()}
+function vG(){return `<h1>Config</h1>${iosList()}${vV()}
 <div class="card"><details open><summary>Regras de ouro</summary><ul><li>Só aumente a dificuldade quando a forma estiver PERFEITA.</li><li>Anote todas as séries e repetições.</li><li>Amplitude completa e controle (2s na descida).</li><li>Dor articular (ombro, cotovelo, joelho) → pare e regrida.</li><li>Durma 8h+ e coma o suficiente.</li><li>Topo da faixa de reps com boa forma → avance.</li><li>Aquecimento obrigatório antes de todo treino.</li></ul></details>
 <details><summary>Descanso</summary><p>Força (barra, flexão, dips, agachamento): 90-120s. Isolamento / core: 60-90s. Entre exercícios diferentes: 60-90s.</p></details></div>
 <div class="card"><b>Semana modelo (4 dias)</b>${WEEK.map(d=>`<div style="padding:5px 0;border-bottom:1px solid var(--bd)"><b>${d[0]}</b> — ${d[1]} <span class="mut">(${d[2]})</span></div>`).join('')}<p class="mut">Frequência: 3-4 dias por semana (máximo 5).</p></div>
@@ -1198,6 +1299,23 @@ function vV(){const w=S.wp||{},gl=S.glass!==false,a=WP.list.find(x=>x.id===w.a),
  ${WP.ok?'':'<p class="mut">Este navegador não permite guardar imagens; o wallpaper vale só até fechar.</p>'}${WP.msg?`<p class="mut">${WP.msg}</p>`:''}
  ${a?`<div class="mut" style="margin-top:14px">Clarear/escurecer o fundo (ajuda a ler): <b id="wd">${dim}%</b></div><input type="range" min="0" max="85" value="${dim}" oninput="wpSet('dim',this.value/100,'wd',this.value+'%')">
  <div class="mut" style="margin-top:10px">Desfoque: <b id="wb">${bl}px</b></div><input type="range" min="0" max="24" value="${bl}" oninput="wpSet('blur',this.value,'wb',this.value+'px')">`:''}</div>`}
+/* ===== iOS: barra superior, atalhos, vibração leve e janela que fecha arrastando ===== */
+const MOB=()=>matchMedia('(max-width:899px)').matches;
+const TN={d:'Painel',t:'Treinar',r:'Registro',p:'Progressão',l:'Tentação',b:'Versículo',g:'Config'};
+function hap(n){try{navigator.vibrate&&navigator.vibrate(n||8)}catch(e){}}
+function sbarScroll(){const b=document.getElementById('sbar');if(b)b.classList.toggle('on',scrollY>38)}
+function sbarUpdate(){const b=document.getElementById('sbar');if(!b)return;document.getElementById('stt').textContent=TN[tab]||'';
+ document.getElementById('sback').style.display=(tab=='p'||tab=='b')?'flex':'none';
+ document.getElementById('sadd').style.display=(tab=='d'||tab=='r')?'grid':'none';sbarScroll()}
+addEventListener('scroll',sbarScroll,{passive:true});
+matchMedia('(max-width:899px)').addEventListener&&matchMedia('(max-width:899px)').addEventListener('change',()=>r());
+function iosList(){const SV=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg>`;
+ return `<div class="card ios-list mo-only" style="margin-top:12px">`+[['p','Progressão','#34c759'],['b','Versículo do dia','#ff9f0a']].map(x=>`<button class="rowl" onclick="go('${x[0]}')"><span class="rli" style="background:${x[2]}">${SV(x[0])}</span><span class="rlt">${x[1]}</span><span class="chev">›</span></button>`).join('')+`</div>`}
+/* fecha a janela "Como fazer" arrastando para baixo (só celular) */
+(function(){let y0=null,dy=0,el=null;
+ document.addEventListener('touchstart',e=>{if(!MOB())return;const s=e.target.closest&&e.target.closest('.mds');if(!s||s.scrollTop>0)return;el=s;y0=e.touches[0].clientY;dy=0;s.style.transition='none'},{passive:true});
+ document.addEventListener('touchmove',e=>{if(y0==null)return;dy=Math.max(0,e.touches[0].clientY-y0);el.style.transform='translateY('+dy+'px)'},{passive:true});
+ document.addEventListener('touchend',()=>{if(y0==null)return;const s=el;s.style.transition='transform .25s ease';if(dy>90){s.style.transform='translateY(100%)';setTimeout(howClose,200)}else s.style.transform='';y0=null;el=null})})();
 const LV={A:'puxada',B:'empurrao',C:'pernas'};
 function lvl(){const k=LV[cur],l=P[k][1][S.prog[k]||0].split('|');return `<div style="margin-top:8px">Seu nível: <b>${l[0]}</b> · <a href="#" onclick="go('p');return false">ver progressão</a></div>`}
 let B={mode:'',txt:'',msg:''},cf=0;
@@ -1211,8 +1329,8 @@ function imp(){try{const j=JSON.parse(document.getElementById('bt').value);if(!A
  if(j.prog)S.prog=j.prog;if(j.goal)S.goal=j.goal;if(j.sk&&j.sk.s)S.sk=j.sk;if(Array.isArray(j.urges)){const hv=new Set((S.urges||[]).map(u=>u.ts));S.urges=(S.urges||[]).concat(j.urges.filter(u=>u&&u.ts&&!hv.has(u.ts)))}if(j.rd&&typeof j.rd=='object')S.rd=Object.assign(S.rd||{},j.rd);if(j.rn&&typeof j.rn=='object')S.rn=Object.assign(S.rn||{},j.rn);if(Array.isArray(j.why))S.why=j.why.slice(0,20).map(String);if(j.glass===false||j.glass===true)S.glass=j.glass;if(j.name)S.name=String(j.name).slice(0,24);save();applyLook();B={mode:'',txt:'',msg:n+' treino(s) importado(s).'}}catch(e){B.msg='Backup inválido. Cole o texto completo do Exportar.'}r()}
 function clr(){if(cf){S={logs:[],prog:{}};save();WP.list.forEach(w=>URL.revokeObjectURL(w.url));WP.list=[];wpTx('readwrite',st=>st.clear()).catch(()=>{});cf=0;B={mode:'',txt:'',msg:'Todos os dados foram apagados.'};applyTh();tab='d'}else cf=1;r()}
 function vA(){const th=S.theme||'';
- return `<div class="card"><b>Ajustes</b><p class="mut">Seu nome</p><input value="${esc(S.name||'')}" placeholder="Atleta" onchange="S.name=this.value.trim().slice(0,24);save();r()"><p class="mut">Aparência</p><div class="pills">${[['','Auto'],['light','Claro'],['dark','Escuro']].map(x=>`<button class="pill ${th==x[0]?'on':''}" onclick="setTh('${x[0]}')">${x[1]}</button>`).join('')}</div>
-<p class="mut">Backup (os dados ficam só neste aparelho)</p><div class="pills"><button class="pill ${B.mode=='x'?'on':''}" onclick="bk('x')">Exportar</button><button class="pill ${B.mode=='i'?'on':''}" onclick="bk('i')">Importar</button></div>
+ return `<div class="card"><b>Ajustes</b><p class="mut">Seu nome</p><input value="${esc(S.name||'')}" placeholder="Atleta" onchange="S.name=this.value.trim().slice(0,24);save();r()"><p class="mut">Aparência</p><div class="pills seg">${[['','Auto'],['light','Claro'],['dark','Escuro']].map(x=>`<button class="pill ${th==x[0]?'on':''}" onclick="setTh('${x[0]}')">${x[1]}</button>`).join('')}</div>
+<p class="mut">Backup (os dados ficam só neste aparelho)</p><div class="pills seg"><button class="pill ${B.mode=='x'?'on':''}" onclick="bk('x')">Exportar</button><button class="pill ${B.mode=='i'?'on':''}" onclick="bk('i')">Importar</button></div>
 ${B.mode?`<textarea id="bt" rows="4" ${B.mode=='x'?'readonly':'placeholder="Cole aqui o backup"'}>${B.mode=='x'?esc(B.txt):''}</textarea><button class="btn" onclick="${B.mode=='x'?'cp()':'imp()'}">${B.mode=='x'?'Copiar':'Importar agora'}</button>`:''}
 ${B.msg?`<p class="mut">${B.msg}</p>`:''}<button class="sm" style="margin-top:12px" onclick="clr()">${cf?'Tem certeza? Toque de novo para apagar tudo':'Apagar todos os dados'}</button></div>`}
 const IC={d:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
@@ -1223,7 +1341,7 @@ b:'<path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"
 l:'<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
 g:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>'};
 function r(){document.getElementById('app').innerHTML={d:vD,t:vT,r:vR,p:vP,l:vL,b:vB,g:vG}[tab]();
- const wb=wkc(0);document.getElementById('nav').innerHTML=logo()+[['d','Painel'],['t','Treinar'],['r','Registro'],['p','Progressão'],['l','Tentação'],['b','Versículo'],['g','Config']].map(x=>`<button class="${x[0]==tab?'on':''}" onclick="go('${x[0]}')"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[x[0]]}</svg><span>${x[1]}</span>${x[0]=='r'&&wb?`<b class="nb">${wb}</b>`:''}</button>`).join('')+sidec()}
+ const wb=wkc(0);document.getElementById('nav').innerHTML=logo()+[['d','Painel'],['t','Treinar'],['r','Registro'],['p','Progressão'],['l','Tentação'],['b','Versículo'],['g','Config']].map(x=>`<button data-t="${x[0]}" class="${(x[0]==tab||(MOB()&&x[0]=='g'&&(tab=='p'||tab=='b')))?'on':''}" onclick="go('${x[0]}')"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[x[0]]}</svg><span>${x[1]}</span>${x[0]=='r'&&wb?`<b class="nb">${wb}</b>`:''}</button>`).join('')+sidec();sbarUpdate()}
 applyTh();r();wpInit();
 
 /* ===== PWA: Manifest + Service Worker + Install ===== */
